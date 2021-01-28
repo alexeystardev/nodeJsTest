@@ -10124,6 +10124,7 @@ header.masthead {
   background-attachment: scroll;
   background-position: center center;
   background-size: cover;
+  text-shadow: 4px 2px 4px #000000;
 }
 header.masthead .masthead-subheading {
   font-size: 1.5rem;
