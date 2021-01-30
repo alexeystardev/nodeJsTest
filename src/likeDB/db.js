@@ -55,7 +55,7 @@ facebook: "Link to facebook page",
 linkedin: "Link to linked-in page"
 },
 {
-	memberName: "Super Gogi",
+	memberName: "Super Man",
 	profession: "Main Actor",
 	memberImg: "./assets/img/team/actor.jpg",
 	twitter: "Link to twitter page",
@@ -63,7 +63,7 @@ linkedin: "Link to linked-in page"
 	linkedin: "Link to linked-in page"
 },
 {
-	memberName: "Flash Ibrahim",
+	memberName: "The Flash",
 	profession: "Main Actor",
 	memberImg: "./assets/img/team/actor2.jpg",
 	twitter: "Link to twitter page",
@@ -71,7 +71,7 @@ linkedin: "Link to linked-in page"
 	linkedin: "Link to linked-in page"
 },
 {
-	memberName: "Batman Shmulik",
+	memberName: "Batman",
 	profession: "Main Actor",
 	memberImg: "./assets/img/team/actor3.jpg",
 	twitter: "Link to twitter page",

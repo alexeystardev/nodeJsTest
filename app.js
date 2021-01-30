@@ -7,10 +7,7 @@ const bodyParser = require("body-parser");
 const schema = require('./src/joiValidator/joiValidator');
 const dotenv = require("dotenv").config();
 const fetch = require("./src/fetch/myFetch");
-const dbCon = require('./src/dbConnection/connection.js');
 const pushContactData = require('./src/dbConnection/pushContact.js');
-const mysql = require('mysql');
-//const pushContactData = require('./src/dbConnection/pushContact.js')
 
 const port = 3000
 
@@ -43,18 +40,6 @@ app.post("/contact", (req, res) => {
 		pushContactData(value, res);
 	}
 });
-
-// function pushData(value) {
-// 	let sql = `INSERT INTO log VALUES(null,?,?,?,?)`;
-// 	let dataArray = [value.name, value.email, value.phone, value.message];
-// 	dbCon.connection.query(sql, dataArray, (error, results, fields) => {
-// 		if (results.affectedRows) {
-// 			console.log('Done');
-// 		} else {
-// 			console.log(error);
-// 		};
-// 	});
-// }
 
 app.get("/services", (req, res) => {
 	res.render("services_page");
