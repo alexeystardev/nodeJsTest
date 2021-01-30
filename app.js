@@ -7,6 +7,10 @@ const bodyParser = require("body-parser");
 const schema = require('./src/joiValidator/joiValidator');
 const dotenv = require("dotenv").config();
 const fetch = require("./src/fetch/myFetch");
+const dbCon = require('./src/dbConnection/connection.js');
+const pushContactData = require('./src/dbConnection/pushContact.js');
+const mysql = require('mysql');
+//const pushContactData = require('./src/dbConnection/pushContact.js')
 
 const port = 3000
 
@@ -24,6 +28,9 @@ app.get("", (req, res) => {
 app.get("/contact", (req, res) => {
 	res.render("contact_page");
 });
+app.get("/thanks_page", (req, res) => {
+	res.render("thanks_page")
+});
 
 app.post("/contact", (req, res) => {
 	const {
@@ -33,9 +40,21 @@ app.post("/contact", (req, res) => {
 	if (error) {
 		res.render("404")
 	} else {
-		res.render("thanks_page");
+		pushContactData(value, res);
 	}
 });
+
+// function pushData(value) {
+// 	let sql = `INSERT INTO log VALUES(null,?,?,?,?)`;
+// 	let dataArray = [value.name, value.email, value.phone, value.message];
+// 	dbCon.connection.query(sql, dataArray, (error, results, fields) => {
+// 		if (results.affectedRows) {
+// 			console.log('Done');
+// 		} else {
+// 			console.log(error);
+// 		};
+// 	});
+// }
 
 app.get("/services", (req, res) => {
 	res.render("services_page");
@@ -46,13 +65,15 @@ app.get("/movies", (req, res) => {
 		`http://www.omdbapi.com/?s=Superman&apikey=${process.env.API_KEY}`
 	);
 	result.then((movies) => {
-		if(movies.Response ==="True"){
+		if (movies.Response === "True") {
 			res.render("movies_page", {
 				movies
 			});
-		}else{
-			const dead="Maybe Api is Dead!";
-			res.render("404apiDead", {dead});
+		} else {
+			const dead = "Maybe Api is Dead!";
+			res.render("404apiDead", {
+				dead
+			});
 		}
 	});
 });
