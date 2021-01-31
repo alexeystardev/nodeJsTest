@@ -35,6 +35,7 @@ app.get('/thanks_page', (req, res) => {
 				id: userContact[0].ID,
 				name: userContact[0].name,
 				email: userContact[0].email,
+				phone: userContact[0].phone,
 				message: userContact[0].message
 			});
 	});
