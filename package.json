@@ -4,10 +4,6 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-	"eject": "react-scripts eject",
-	"dev": "react-scripts start",
 "start": "serve -s build"
   },
   "keywords": [],
