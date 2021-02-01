@@ -11,7 +11,7 @@ const pushContactData = require('./src/dbConnection/pushContact.js');
 const dbCon = require('./src/dbConnection/connection.js');
 const mysql = require('mysql');
 
-const port = process.env.PORT || 3000;
+//const port = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({
 	extended: false
@@ -90,6 +90,7 @@ app.get('*', (req, res) => {
 	res.render("404");
 });
 
-app.listen(port, () => {
-	console.log(`Running on port: ${port}`)
-})
+app.listen(process.env.PORT || 3000, function () {
+	console.log('Server listening on port 3000');
+
+});
