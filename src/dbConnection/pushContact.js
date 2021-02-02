@@ -1,19 +1,23 @@
-const dbCon = require('./connection.js');
-const mysql = require('mysql');
+const mongoose = require('mongoose');
+const validator = require('validator');
 
-function pushContactData(value, res) {
+const logContactSchema = mongoose.Schema({
+	name: {
+		type: String,
+		required: true
+	},
+	email: {
+		type: String,
+		validate(value) {
+			if (!validator.isEmail(value)) {
+				throw new Error('Email is invalid')
+			}
+		},
+	},
+	phone: Number,
+	message: String
+});
 
-	let sql = `INSERT INTO log VALUES(null,?,?,?,?)`;
-	let dataArray = [value.name, value.email, value.phone, value.message];
-	dbCon.connection.query(sql, dataArray, (error, results, fields) => {
-		  if (results.affectedRows) {
-		  	res.redirect('/thanks_page?id=' +results.insertId);
-		  } else {
-		  	res.redirect('/contact');
-		}
-	});
-}
-
-module.exports = pushContactData;
+module.exports = mongoose.model('Contact', logContactSchema)
 
 

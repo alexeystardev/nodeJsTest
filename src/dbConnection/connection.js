@@ -1,21 +1,16 @@
-const mysql = require('mysql');
+const mongoose = require('mongoose');
 
+function connect() {
+	mongoose.connect(`${process.env.DB_PASS_LINK}`, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true
+	});
 
-const connection = mysql.createConnection({
-	host: 'localhost',
-	user: 'root',
-	password: '',
-	port: 3306,
-	database: 'logcontact'
-});
-connection.connect(err => {
-	if (err) {
-		console.error('error connecting: ' + err.stack);
-		return;
-	}
-	console.log('connected as id ' + connection.threadId);
-});
+	const db = mongoose.connection;
+	db.on('error', console.error.bind(console, 'connection error:'));
+	db.once('open', function () {
+		console.log('MongoDB connected');
+	});
+}
 
-module.exports = {
-	connection
-};
+module.exports = connect;

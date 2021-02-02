@@ -7,9 +7,11 @@ const bodyParser = require("body-parser");
 const schema = require('./src/joiValidator/joiValidator');
 const dotenv = require("dotenv").config();
 const fetch = require("./src/fetch/myFetch");
-const pushContactData = require('./src/dbConnection/pushContact.js');
-const dbCon = require('./src/dbConnection/connection.js');
-const mysql = require('mysql');
+const connect = require("./src/dbConnection/connection");
+const Contact = require('./src/dbConnection/pushContact');
+
+const connectToMongoDb = require('./src/dbConnection/connection');
+connectToMongoDb();
 
 app.use(bodyParser.urlencoded({
 	extended: false
@@ -26,18 +28,10 @@ app.get("/contact", (req, res) => {
 	res.render("contact_page");
 });
 
-app.get('/thanks_page', (req, res) => {
-		dbCon.connection.query('SELECT * FROM log WHERE ID ='+ req.query.id, function (err, rows) {
-			let userContact = JSON.parse(JSON.stringify(rows));
-			res.render('thanks_page', {
-				id: userContact[0].ID,
-				name: userContact[0].name,
-				email: userContact[0].email,
-				phone: userContact[0].phone,
-				message: userContact[0].message
-			});
-	});
-});
+// app.get('/thanks_page', (req, res) => {
+// 			res.render('thanks_page');
+// 			console.log(req.params)
+// });
 
 app.post("/contact", (req, res) => {
 	const {
@@ -47,7 +41,13 @@ app.post("/contact", (req, res) => {
 	if (error) {
 		res.render("404")
 	} else {
-		pushContactData(value, res);
+		const myContact = new Contact(value);
+		myContact.save().then((value, result) => res.render('thanks_page', {
+			name: value.name,
+			email: value.email,
+			phone: value.phone,
+			message: value.message
+		}));
 	}
 });
 
