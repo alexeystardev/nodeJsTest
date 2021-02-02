@@ -28,10 +28,9 @@ app.get("/contact", (req, res) => {
 	res.render("contact_page");
 });
 
-// app.get('/thanks_page', (req, res) => {
-// 			res.render('thanks_page');
-// 			console.log(req.params)
-// });
+app.get('/thanks_page', (req, res) => {
+			res.render('thanks_page');
+});
 
 app.post("/contact", (req, res) => {
 	const {
