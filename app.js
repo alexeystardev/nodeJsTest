@@ -28,9 +28,9 @@ app.get("/contact", (req, res) => {
 	res.render("contact_page");
 });
 
-app.get('/thanks_page', (req, res) => {
-			res.render('thanks_page');
-});
+// app.get('/thanks_page', (req, res) => {
+// 			res.render('thanks_page');
+// });
 
 app.post("/contact", (req, res) => {
 	const {
@@ -41,7 +41,7 @@ app.post("/contact", (req, res) => {
 		res.render("404")
 	} else {
 		const myContact = new Contact(value);
-		myContact.save().then((value, result) => res.render('thanks_page', {
+		myContact.save().then((value) => res.render('/thanks_page', {
 			name: value.name,
 			email: value.email,
 			phone: value.phone,

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 function connect() {
-	mongoose.connect(`mongodb+srv://${process.env.DB_PASS_LINK}@cluster0.pbli4.mongodb.net/logcontact?retryWrites=true&w=majority`, {
+	mongoose.connect(`${process.env.DB_PASS_LINK}`, {
 		useNewUrlParser: true,
 		useUnifiedTopology: true
 	});
