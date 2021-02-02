@@ -14,7 +14,7 @@ const logContactSchema = mongoose.Schema({
 			}
 		},
 	},
-	phone: Number,
+	phone: String,
 	message: String
 });
 
